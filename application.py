@@ -8,11 +8,11 @@ app=application
 
 
 
-@app.route('/')
-def home_page():
-    return render_template('index.html')
+# @app.route('/')
+# def home_page():
+#     return render_template('index.html')
 
-@app.route('/predict',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 
 def predict_datapoint():
     if request.method=='GET':
@@ -36,7 +36,7 @@ def predict_datapoint():
 
         results=round(pred[0],2)
 
-        return render_template('results.html',final_result=results)
+        return render_template('form.html',pred=results)
 
 
 

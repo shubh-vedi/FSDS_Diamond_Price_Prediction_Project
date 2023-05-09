@@ -1,35 +1,127 @@
 <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Predict Diamond Price</title>
+        <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+      <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='./style.css') }}">
+
+
+      <style>
+        body {
+          background-image: url("https://wallpapers.com/images/high/crystalizing-bokeh-on-pink-blue-6tsonijor902zugb.webp");
+          background-repeat: no-repeat;
+          height: 100%;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+        }
+
+
+        .form-center form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.label {
+  color: white;
+  padding: 8px;
+  font-family: Arial;}
+  .success {background-color: #3b0aec;} /* Green */
+
+
+  .button {
+  padding: 10px 20px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #d31f1f;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+}
+
+.button:hover {background-color: #10216b}
+
+.button:active {
+  background-color: #8e3e3e;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+.info {
+  width: 320px;
+  padding: 10px;
+  /* border: 5px solid rgb(233, 131, 247); */
+  margin: 0;
+  /* position: absolute;
+  top: 55%;
+  left: 80%;
+  transform: translate(-50%,-50%); */
+}
+
+h1 {
+  /* text-decoration-line: underline;
+  text-decoration-color: green;   */
+  text-shadow: 2px 2px 5px rgb(100, 83, 46);
+}
+
+a{
+  color: #10216b;
+}
+
+ 
+      </style>
+
+        
+      </head>
 <body>
-<form action="{{url_for('predict_datapoint')}}" method="POST">
+  <div class="form-center">
+    
+   
+<form action="{{url_for('predict_datapoint')}}" method="POST"required>
+
+  <h1>Diamond Price Prediction</h1>
+
+
     <div class="form-group">
         <label for="carat">Carat:</label>
-        <input type="text" id="carat" name="carat" placeholder="Enter carat value (float)">
-    </div>
+        <input type="text" id="carat" name="carat" placeholder="Enter carat value (float)" required>
+    </div><br>
 
     <div class="form-group">
         <label for="depth">Depth:</label>
-        <input type="text" id="depth" name="depth" placeholder="Enter depth value (float)">
-    </div>
+        <input type="text" id="depth" name="depth" placeholder="Enter depth value (float)" required>
+    </div><br>
 
     <div class="form-group">  
         <label for="table">Table:</label>
-        <input type="text" id="table" name="table" placeholder="Enter table value (float)">
-    </div>
+        <input type="text" id="table" name="table" placeholder="Enter table value (float)" required=>
+    </div><br>
     
     <div class="form-group">
         <label for="x">x:</label>
-        <input type="text" id="x" name="x" placeholder="Enter x value (float)">
-    </div>
+        <input type="text" id="x" name="x" placeholder="Enter x value (float)" required=>
+    </div><br>
   
     <div class="form-group">
         <label for="y">y:</label>
-        <input type="text" id="y" name="y" placeholder="Enter y value (float)">
-    </div>
+        <input type="text" id="y" name="y" placeholder="Enter y value (float)" required>
+    </div><br>
   
     <div class="form-group">
         <label for="z">z:</label>
-        <input type="text" id="z" name="z" placeholder="Enter z value (float)">
-    </div>         
+        <input type="text" id="z" name="z" placeholder="Enter z value (float)" required>
+    </div><br>    
   
 <div class="form-group">
   <label for="cut">Cut:</label>
@@ -40,7 +132,7 @@
     <option value="Premium">Premium</option>
     <option value="Ideal">Ideal</option>
   </select>
-</div>
+</div><br>
   
 <div class="form-group">
   <label for="color">Color:</label>
@@ -53,9 +145,9 @@
     <option value="I">I</option>
     <option value="J">J</option>
   </select>
-</div>
+</div><br>
 
-<div class="form-group">
+<div class="form-group" ,>
   <label for="clarity">Clarity:</label>
   <select id="clarity" name="clarity">
     <option value="I1">I1</option>
@@ -67,12 +159,45 @@
     <option value="VVS1">VVS1</option>
     <option value="IF">IF</option>
   </select>
-</div>
+</div><br>
 
 <div style="clear:both;"></div>
-  <input type="submit" value="Submit">
-  
+<button class="button">Submit</button><br><br><br>
+
+  <span class="label success">Price Of Diamond Is : {{pred}}</span><br><br><br>
+
+ <a href="https://github.com/shubh-vedi/FSDS_Diamond_Price_Prediction_Project">(By Shubh Vedi)</a>
+
+ 
+
 </form>
-<h1>{{final_results}}</h1>
+
+<div class="info">
+  <h2>Attributes :- </h2>
+
+<h3>Carat : Carat weight of the Diamond.</h3>
+<h3>Cut : Describe cut quality of the diamond. Quality in increasing order Fair, Good, Very Good, Premium, Ideal</h3>
+<h3>Color : Color of the Diamond. from J (worst) to D (best)</h3>
+<h3>Clarity : Diamond Clarity refers to the absence of the Inclusions and Blemishes. 
+  In order from worst to best :- I1,SI2, SI1, VS2, VS1, VVS2, VVS1, IF</h3>
+<h3>Depth : The Height of a Diamond, measured from the Culet to the table, divided by its average Girdle Diameter.
+
+</h3>
+
+<h3>Table : The Width of the Diamond's Table expressed as a Percentage of its Average Diameter.</h3>
+<h3>X : Length of the Diamond in mm.</h3>
+<h3>Y : Width of the Diamond in mm.</h3>
+<h3>Z : Height of the Diamond in mm.</h3>
+<h3>Price : the Price of the Diamond.</h3>
+
+
+
+
+
+</div>
+
+
+
+
 </body>
 </html>
