@@ -1,7 +1,7 @@
-gunicorn
 numpy 
 pandas
 Flask
 scikit-learn
 seaborn
+gunicorn
 -e .
