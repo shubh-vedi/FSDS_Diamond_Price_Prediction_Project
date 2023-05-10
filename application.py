@@ -8,9 +8,6 @@ app=application
 
 #hi
 
-# @app.route('/')
-# def home_page():
-#     return render_template('index.html')
 
 @app.route('/',methods=['GET','POST'])
 
@@ -37,6 +34,19 @@ def predict_datapoint():
         results=round(pred[0],2)
 
         return render_template('form.html',pred=results)
+
+@app.route('/info')
+def info_page():
+    if request.method == 'POST':
+        return render_template('info.html', shortcode=request.form['shortcode'])
+    elif request.method == 'GET':
+        return redirect(url_for('/'))
+    else:
+        return 'Not a valid request method for this route'
+
+    return render_template('info.html')
+
+
 
 
 
